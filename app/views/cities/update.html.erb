@@ -1,0 +1,46 @@
+<% if not @city.nil? %>
+    <h1>Update the city <%= @city.name %></h1>
+    <h4>We have prefilled the info for you!</h4>
+    <%= form_with local: true, :html => { :onsubmit => "show()"}, url: '../cities/update_handle', method: "post" do |form| %>
+        City's Landmark:  <%= form.text_field :landmark, :value => @city.landmark %><br>
+        City's Population:  <%= form.text_field :population, :value => @city.population %><br>
+        <%= form.hidden_field :city, value: @city.name %>
+        <%= form.submit %>
+    <% end %>
+<% else %>
+    <h1>Some Errors Happen...</h1>
+    <p>You need to give a valid city name to do the update</p>
+<% end %>
+
+<style>
+h4 {
+    color: grey
+}
+h1 {
+    color: orange
+}
+input {
+    margin-top: 10px
+}
+body {
+    margin-left: 30px
+}
+input[type="submit"] {
+    background-color: red;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 20px;
+}
+</style>
+
+<script>
+    function show() {
+        alert("The city has been succesfully updated!");
+    }
+</script>

@@ -1,0 +1,39 @@
+<h1>Creating a new city in simple steps</h1>
+<%= form_with local: true, url: "../cities/create", :html => {:onsubmit => "check()"}, method: "post" do |form| %>
+    City Name: <%= form.text_field :city %><br>
+	City's Landmark: <%= form.text_field :landmark %><br>
+    City's Population: <%= form.text_field :population %><br>
+	<%= form.submit %>
+<% end %>
+
+<style>
+h1 {
+    color: green
+}
+input {
+    margin-top: 10px;
+    padding: 5px
+}
+body {
+    margin-left: 30px
+}
+input[type="submit"] {
+    background-color: lightgreen;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 20px;
+}
+</style>
+
+<%# javascript code that check if info is filled blank %>
+<script>
+function check() {
+    alert('if the page doesnt jump to view, plz check if you have entered the name')
+}
+</script>
