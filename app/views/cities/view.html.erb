@@ -1,5 +1,4 @@
 <h1>Star's Weather Report Station</h1>
-<h4>The following are cities you have created!</h4>
 <% if not @city.nil? %>
 	<% if @has_found %>
 		<% c = City.all[@city.to_sym] %>
@@ -13,20 +12,25 @@
 			The city <b style="color: red"><%= @city %></b> that you are looking for hasn't been created yet...
 		</p>
 	<% end %>
-<% else %>
-	<% City.all.each_value do |c| %>
-		<% if not c.nil? %>
-			<h2> <%= c.name %></h2>
-			<p>
-				The landmark for this place is <%= c.landmark %>
-				and the population is <%= c.population %>
-			</p>
-		<% else %>
-			<p>Better give an input for us to process!</p>
+<% else %>	
+	<% if City.all.empty? %>
+		<p>You don't have any record by far...</p>
+	<% else %>
+		<h4>The following are cities you have created!</h4>
+		<% City.all.each_value do |c| %>
+			<% if not c.nil? %>
+				<h2> <%= c.name %></h2>
+				<p>
+					The landmark for this place is <%= c.landmark %>
+					and the population is <%= c.population %>
+				</p>
+			<% else %>
+				<p>Better give an input for us to process!</p>
+			<% end %>
+			<%= button_to "update this", action: "update", city: c.name, authenticity_token: @token%>
+			<%= button_to "delete this", action: "delete", city: c.name, authenticity_token: @token%>
+			<hr>
 		<% end %>
-		<%= button_to "update this", action: "update", city: c.name, authenticity_token: @token%>
-		<%= button_to "delete this", action: "delete", city: c.name, authenticity_token: @token%>
-		<hr>
 	<% end %>
 <% end %>
 
